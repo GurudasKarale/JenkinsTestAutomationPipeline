@@ -32,7 +32,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 echo "Running Selenium + Cucumber Tests..."
-        // This ensures even if 'mvn test' fails, pipeline continues to next stage
+        
             catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
             bat 'mvn test'
                 }
@@ -42,15 +42,15 @@ pipeline {
         stage('Publish Extent Report') {
 
              when {
-                always() // ensures this stage always runs, regardless of previous result
+                always() 
              }
             
             steps {
                 echo "Publishing Extent HTML Report..."
-                // Archive Extent Report instead of cucumber report
+                
                 archiveArtifacts artifacts: 'target/ExtentReport/**', fingerprint: true
 
-                // Optionally use Jenkins HTML Publisher plugin to show in job UI
+                
                 publishHTML([
                     reportDir: 'target/ExtentReport',
                     reportFiles: 'Spark.html',
