@@ -40,17 +40,12 @@ pipeline {
         }
 
         stage('Publish Extent Report') {
-
-             when {
-                always() 
-             }
             
             steps {
                 echo "Publishing Extent HTML Report..."
                 
                 archiveArtifacts artifacts: 'target/ExtentReport/**', fingerprint: true
 
-                
                 publishHTML([
                     reportDir: 'target/ExtentReport',
                     reportFiles: 'Spark.html',
