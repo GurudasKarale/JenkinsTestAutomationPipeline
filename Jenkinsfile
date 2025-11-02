@@ -32,12 +32,19 @@ pipeline {
         stage('Run Tests') {
             steps {
                 echo "Running Selenium + Cucumber Tests..."
-                // Ensure your project is configured to generate Extent Report during 'mvn test'
-                bat 'mvn test'
+        // This ensures even if 'mvn test' fails, pipeline continues to next stage
+            catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
+            bat 'mvn test'
+                }
             }
         }
 
         stage('Publish Extent Report') {
+
+             when {
+                always() // ensures this stage always runs, regardless of previous result
+             }
+            
             steps {
                 echo "Publishing Extent HTML Report..."
                 // Archive Extent Report instead of cucumber report
@@ -50,7 +57,7 @@ pipeline {
                     reportName: 'Extent Report',
                     keepAll: true,
                     alwaysLinkToLastBuild: true,
-                    allowMissing: false
+                    allowMissing: true
                 ])
             }
         }
