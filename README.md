@@ -3,6 +3,8 @@
 This repository contains **Cucumber + Selenium** automation scripts .
 It supports **parallel execution**, **Extent HTML reporting**, and includes a **Jenkinsfile** for automated CI/CD pipeline integration.
 
+<img width="1060" height="322" alt="image" src="https://github.com/user-attachments/assets/21cd1136-4f59-45bd-97c5-ef25d7ed4b15" />
+
 
 ## Run Tests Locally
 ```bash
@@ -11,5 +13,3 @@ mvn clean compile
 
 # Execute tests
 mvn test
-
-<img width="1060" height="322" alt="image" src="https://github.com/user-attachments/assets/74f3e94f-714d-41aa-abb9-c6e766954647" />
